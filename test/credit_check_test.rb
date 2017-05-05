@@ -34,4 +34,21 @@ class CreditCheckTest < Minitest::Test
     assert_equal odd_doubled, checker.double_odd_positions(numbers)
   end
 
+  def test_add_digits_together_if_double_digit
+    checker = CreditCheck.new
+    odd_doubled =  [3, 8, 5, 0, 5,
+                    4, 7, 14, 4, 10,
+                    3, 14, 9, 4, 9, 8]
+    doubles_added = [3, 8, 5, 0, 5,
+                    4, 7, 5, 4, 1,
+                    3, 5, 9, 4, 9, 8]
+
+    assert_equal doubles_added, checker.convert_double_digits(odd_doubled)
+  end
+
+  def test_digits_are_added_if_double_digits
+    checker = CreditCheck.new
+    assert_equal 5, checker.add_double_digits(14)
+  end
+
 end
