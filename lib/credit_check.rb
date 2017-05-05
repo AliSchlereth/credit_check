@@ -1,12 +1,23 @@
 class CreditCheck
 
   def valid?(number)
-    double_even_positions(number.chars)
+    cleaned = convert_to_integers(number)
+    double_odd_positions(cleaned)
   end
 
-  def double_even_positions(numbers)
-    numbers.map do |num|
-      num = num*2 if num.even?
+  def convert_to_integers(number)
+    number.chars.reverse.map do |num|
+      num.to_i
+    end
+  end
+
+  def double_odd_positions(numbers)
+    numbers.map.with_index do |num, index|
+      if index.odd?
+        num*2
+      else
+        num
+      end
     end
   end
 

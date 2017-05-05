@@ -12,12 +12,26 @@ class CreditCheckTest < Minitest::Test
     refute checker.valid?(cc_number)
   end
 
-  def test_each_even_position_is_doubled
+  def test_input_number_is_converted_to_an_array_of_integers
     checker = CreditCheck.new
-    numbers = ["4", "9", "2", "9", "7",
-               "3", "5", "4", "7", "7",
-               "2", "5", "0", "5", "4", "3"]
-    
+    cc_number = "4929735477250543"
+    converted = [3, 4, 5, 0, 5,
+                 2, 7, 7, 4, 5,
+                 3, 7, 9, 2, 9, 4]
+
+    assert_equal converted, checker.convert_to_integers(cc_number)
+  end
+
+  def test_each_odd_position_is_doubled
+    checker = CreditCheck.new
+    numbers = [3, 4, 5, 0, 5,
+               2, 7, 7, 4, 5,
+               3, 7, 9, 2, 9, 4]
+    odd_doubled =  [3, 8, 5, 0, 5,
+                    4, 7, 14, 4, 10,
+                    3, 14, 9, 4, 9, 8]
+
+    assert_equal odd_doubled, checker.double_odd_positions(numbers)
   end
 
 end
