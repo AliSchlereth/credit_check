@@ -4,7 +4,7 @@ class CreditCheck
     cleaned       = convert_to_integers(number)
     doubled       = double_odd_positions(cleaned)
     doubles_added = convert_double_digits(doubled)
-    # add_all_digits(doubles_added)
+    add_all_digits(doubles_added)
   end
 
   def convert_to_integers(number)
@@ -36,6 +36,12 @@ class CreditCheck
   def add_double_digits(num)
     num.to_s.chars.reduce(0) do |result, num|
       result += num.to_i
+    end
+  end
+
+  def add_all_digits(doubles_added)
+    doubles_added.reduce(0) do |result, num|
+      result += num
     end
   end
 

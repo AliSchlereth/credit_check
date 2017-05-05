@@ -48,7 +48,16 @@ class CreditCheckTest < Minitest::Test
 
   def test_digits_are_added_if_double_digits
     checker = CreditCheck.new
+
     assert_equal 5, checker.add_double_digits(14)
+  end
+
+  def test_all_digits_are_totaled
+    checker = CreditCheck.new
+    doubles_added = [3, 8, 5, 0, 5,
+                    4, 7, 5, 4, 1,
+                    3, 5, 9, 4, 9, 8]
+    assert_equal "", checker.add_all_digits(doubles_added)
   end
 
 end
