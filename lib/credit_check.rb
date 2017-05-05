@@ -1,10 +1,21 @@
 class CreditCheck
 
+  def validate(number)
+    result = if valid?(number)
+      "The number is valid!"
+    else
+      "The number is invalid!"
+    end
+    p result
+  end
+
+
   def valid?(number)
     cleaned       = convert_to_integers(number)
     doubled       = double_odd_positions(cleaned)
     doubles_added = convert_double_digits(doubled)
-    add_all_digits(doubles_added)
+    total         = add_all_digits(doubles_added)
+    multiple_of_ten?(total)
   end
 
   def convert_to_integers(number)
@@ -43,6 +54,10 @@ class CreditCheck
     doubles_added.reduce(0) do |result, num|
       result += num
     end
+  end
+
+  def multiple_of_ten?(total)
+    total % 10 == 0
   end
 
 end

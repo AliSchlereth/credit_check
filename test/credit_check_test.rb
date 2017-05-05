@@ -5,11 +5,17 @@ require "pry"
 
 class CreditCheckTest < Minitest::Test
 
-  def test_the_files_talk_to_each_other
+  def test_valid_returns_true_or_false
     checker = CreditCheck.new
-    cc_number = "4929735477250543"
+    another = "5541801923795240"
+    falseyish = "4024007106512380"
+    valid = "5541808923795240"
+    truthyish = "4024007136512380"
 
-    refute checker.valid?(cc_number)
+    refute checker.valid?(another)
+    refute  checker.valid?(falseyish)
+    assert  checker.valid?(valid)
+    assert  checker.valid?(truthyish)
   end
 
   def test_input_number_is_converted_to_an_array_of_integers
@@ -55,9 +61,23 @@ class CreditCheckTest < Minitest::Test
   def test_all_digits_are_totaled
     checker = CreditCheck.new
     doubles_added = [3, 8, 5, 0, 5,
-                    4, 7, 5, 4, 1,
-                    3, 5, 9, 4, 9, 8]
-    assert_equal "", checker.add_all_digits(doubles_added)
+                     4, 7, 5, 4, 1,
+                     3, 5, 9, 4, 9, 8]
+    assert_equal 80, checker.add_all_digits(doubles_added)
+  end
+
+  def test_validation_prints_postive_result
+    checker = CreditCheck.new
+    valid = "5541808923795240"
+
+    assert_equal "The number is valid!", checker.validate(valid)
+  end
+
+  def test_validation_prints_postive_result
+    checker = CreditCheck.new
+    invalid = "4024007106512380"
+
+    assert_equal "The number is invalid!", checker.validate(invalid)
   end
 
 end
